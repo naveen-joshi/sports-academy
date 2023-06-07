@@ -1,0 +1,36 @@
+<div
+  class="flex flex-col items-center justify-center w-full h-[100dvh] gap-[16px]"
+>
+  <h3 class="text-2xl mb-[16px]">Login to Admin Panel</h3>
+  <form [formGroup]="loginForm">
+    <div class="form-control w-full max-w-xs">
+      <label class="label">
+        <span class="label-text">Email</span>
+      </label>
+      <input
+        formControlName="email"
+        type="text"
+        placeholder="Type Email"
+        class="input input-bordered w-[250px] max-w-xs"
+      />
+    </div>
+    <div class="form-control w-full max-w-xs">
+      <label class="label">
+        <span class="label-text">Password</span>
+      </label>
+      <input
+        formControlName="password"
+        type="password"
+        placeholder="Enter your password"
+        class="input input-bordered w-full max-w-xs"
+      />
+    </div>
+  </form>
+  <button
+    class="btn btn-primary"
+    (click)="login()"
+    [disabled]="!loginForm.valid"
+  >
+    Login
+  </button>
+</div>
