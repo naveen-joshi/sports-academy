@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/thesportsacademy",
+            "outputPath": "dist/thesportsacademy/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -102,6 +102,60 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/thesportsacademy/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "thesportsacademy:build:development",
+              "serverTarget": "thesportsacademy:server:development"
+            },
+            "production": {
+              "browserTarget": "thesportsacademy:build:production",
+              "serverTarget": "thesportsacademy:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "thesportsacademy:build:production",
+              "serverTarget": "thesportsacademy:server:production"
+            },
+            "development": {
+              "browserTarget": "thesportsacademy:build:development",
+              "serverTarget": "thesportsacademy:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

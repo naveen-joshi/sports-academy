@@ -19,13 +19,12 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let user = localStorage.getItem('user');
-    if (user !== null) {
-      if (JSON.parse(user).email) {
-        console.log(JSON.parse(user));
-        this.route.navigate(['/admin-dashboard']);
-      }
-    }
+    // let user = localStorage.getItem('user');
+    // if (user !== null) {
+    //   if (JSON.parse(user).email) {
+    //     this.route.navigate(['/admin-dashboard']);
+    //   }
+    // }
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -39,12 +38,12 @@ export class LoginComponent implements OnInit {
       .then((data) => {
         console.log(data);
         this.isLoggedIn = true;
-        localStorage.setItem('user', JSON.stringify(data.user));
+        // localStorage.setItem('user', JSON.stringify(data.user));
       });
   }
 
   logout() {
     this.firebaseAuth.signOut();
-    localStorage.removeItem('user');
+    // localStorage.removeItem('user');
   }
 }
