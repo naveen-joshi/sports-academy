@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { AdminLandingComponent } from './components/admin-landing/admin-landing.component';
 
 const routes: Routes = [
   {
@@ -11,12 +13,15 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () =>
-      import('./components/login/login.module').then((m) => m.LoginModule),
+    component: LoginComponent,
   },
   {
-    path: 'admin-dashboard',
-    component: AdminDashboardComponent,
+    path: 'admin-landing',
+    component: AdminLandingComponent,
+  },
+  {
+    path: 'add-user/:id',
+    component: AddUserComponent,
   },
   {
     path: '**',

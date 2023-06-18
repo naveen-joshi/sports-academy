@@ -1,8 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {
+  Auth,
+  getAuth,
+  authState,
+  signInWithEmailAndPassword,
+  signOut,
+  User,
+} from '@angular/fire/auth';
+// import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalstorageService } from 'src/app/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -11,20 +20,22 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public loginForm!: FormGroup;
+  // public auth = getAuth();
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    public firebaseAuth: AngularFireAuth,
-    private route: Router
+    private route: Router,
+    private localStorage: LocalstorageService,
+    private auth: Auth
   ) {}
 
   ngOnInit() {
-    // let user = localStorage.getItem('user');
-    // if (user !== null) {
-    //   if (JSON.parse(user).email) {
-    //     this.route.navigate(['/admin-dashboard']);
-    //   }
-    // }
+    let user = this.localStorage.getItem('user');
+    if (user !== null) {
+      if (JSON.parse(user).email) {
+        this.route.navigate(['/admin-landing']);
+      }
+    }
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -33,17 +44,12 @@ export class LoginComponent implements OnInit {
 
   async login() {
     let form = this.loginForm.getRawValue();
-    this.firebaseAuth
-      .signInWithEmailAndPassword(form.email, form.password)
-      .then((data) => {
-        console.log(data);
+    await signInWithEmailAndPassword(this.auth, form.email, form.password).then(
+      (data) => {
         this.isLoggedIn = true;
-        // localStorage.setItem('user', JSON.stringify(data.user));
-      });
-  }
-
-  logout() {
-    this.firebaseAuth.signOut();
-    // localStorage.removeItem('user');
+        this.localStorage.setItem('user', JSON.stringify(data.user));
+        this.route.navigate(['admin-landing']);
+      }
+    );
   }
 }

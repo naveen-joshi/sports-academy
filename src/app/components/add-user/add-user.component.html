@@ -1,0 +1,109 @@
+<div class="flex items-center justify-between gap-[16px] custom">
+  <div class="card flex flex-col shadow-xl m-4 p-4 mx-auto my-[16px]">
+    <h3 class="text-2xl text-center">Create New User</h3>
+    <form class="flex flex-col gap-[8px]" [formGroup]="UserForm">
+      <div class="form-control w-full max-w-xs">
+        <label for="name" class="label"
+          ><span class="label-text">Name</span></label
+        >
+        <input
+          id="name"
+          type="text"
+          placeholder="Type here"
+          class="input input-bordered w-[80vw] max-w-[600px]"
+          formControlName="name"
+        />
+      </div>
+      <div class="form-control w-full max-w-xs">
+        <label for="fatherName" class="label"
+          ><span class="label-text">Father's Name</span></label
+        >
+        <input
+          id="fatherName"
+          type="text"
+          placeholder="Type here"
+          class="input input-bordered w-[80vw] max-w-[600px]"
+          formControlName="fatherName"
+        />
+      </div>
+      <div class="form-control w-full max-w-xs">
+        <label for="motherName" class="label"
+          ><span class="label-text">Mother's Name</span></label
+        >
+        <input
+          id="motherName"
+          type="text"
+          placeholder="Type here"
+          class="input input-bordered w-[80vw] max-w-[600px]"
+          formControlName="motherName"
+        />
+      </div>
+      <div class="form-control w-full max-w-xs">
+        <label for="dob" class="label"
+          ><span class="label-text">Date of birth</span></label
+        >
+        <input
+          id="dob"
+          type="date"
+          placeholder="Type here"
+          class="input input-bordered w-[80vw] max-w-[600px]"
+          formControlName="dob"
+        />
+      </div>
+      <div class="flex flex-col gap-[16px]">
+        <label class="label"><span class="label-text">Gender</span></label>
+        <div class="flex gap-[16px]">
+          <div class="flex gap-[8px]">
+            <input type="radio" name="gender" class="radio" />
+            <label for="male">Male</label>
+          </div>
+          <div class="flex gap-[8px]">
+            <input type="radio" name="gender" class="radio" />
+            <label for="female">Female</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-control w-full">
+        <label class="label"><span class="label-text">Mobile</span></label>
+        <input
+          type="text"
+          placeholder="Enter your phone number"
+          class="input input-bordered w-[80vw] max-w-[600px]"
+          formControlName="mobile"
+        />
+      </div>
+      <div class="form-control w-full">
+        <label class="label"><span class="label-text">Activity</span></label>
+        <select
+          class="select select-bordered w-[80vw] max-w-[600px]"
+          formControlName="activities"
+        >
+          <option disabled selected>Pick your favorite Activity</option>
+          <option>Yoga</option>
+          <option>Dance</option>
+          <option>Karate</option>
+          <option>Skating</option>
+          <option>Drawing</option>
+          <option>Boxing</option>
+          <option>Swimming</option>
+          <option>Gym</option>
+        </select>
+      </div>
+    </form>
+
+    <div class="my-[16px] flex gap-[16px] flex-wrap">
+      <button
+        class="btn btn-secondary xs:w-full sm:w-full lg:w-[48.75%]"
+        routerLink="/admin-dashboard"
+      >
+        Cancel
+      </button>
+      <button
+        class="btn btn-primary xs:w-full sm:w-full lg:w-[48.5%]"
+        (click)="onSubmit()"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>

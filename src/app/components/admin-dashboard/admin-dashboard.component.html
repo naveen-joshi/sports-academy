@@ -1,9 +1,10 @@
 <div class="flex justify-between p-[16px]">
   <h3>User List</h3>
-  <!-- <button class="btn btn-primary" (click)="openModal()">+ Add User</button> -->
 </div>
 
-<div class="flex justify-between bg-slate-400 p-[16px] m-[16px] rounded">
+<div
+  class="flex justify-between items-center bg-slate-400 p-[8px] m-[8px] rounded"
+>
   <div class="relative">
     <div
       class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
@@ -27,25 +28,49 @@
     <input
       type="search"
       id="default-search"
-      class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       placeholder="Search User"
       [(ngModel)]="searchValue"
       (input)="onSearch(searchValue)"
     />
   </div>
-  <label for="my_modal_6" class="btn btn-primary">+ Add User</label>
+  <button class="btn btn-primary btn-sm" (click)="exportexcel()">
+    <svg
+      class="download-icon"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        class="download-arrow"
+        d="M13 9L9 13M9 13L5 9M9 13V1"
+        stroke="#F2F2F2"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M1 17V18C1 18.7956 1.31607 19.5587 1.87868 20.1213C2.44129 20.6839 3.20435 21 4 21H14C14.7956 21 15.5587 20.6839 16.1213 20.1213C16.6839 19.5587 17 18.7956 17 18V17"
+        stroke="#F2F2F2"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    Export Data to Excel
+  </button>
 </div>
 
-<div class="overflow-x-auto m-[16px] p-[16px] bg-zinc-500">
-  <table class="table">
+<div class="flex items-center justify-center">
+  <app-loader></app-loader>
+</div>
+<div class="overflow-x-scroll m-[8px] p-[16px]" *ngIf="!isFetching">
+  <table class="table table-zebra" id="excel-table">
     <!-- head -->
     <thead>
       <tr>
-        <th>
-          <label>
-            <input type="checkbox" class="checkbox" />
-          </label>
-        </th>
         <th>Name</th>
         <th>Category</th>
         <th>Mobile</th>
@@ -53,22 +78,21 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of filteredUsers; let i = index">
-        <th>
-          <label>
-            <input type="checkbox" class="checkbox" />
-          </label>
-        </th>
+      <tr
+        *ngFor="let user of filteredUsers; let i = index"
+        class="hover"
+        (click)="viewUser(user)"
+      >
         <td>
           <div class="flex items-center space-x-3">
-            <div class="avatar">
+            <!-- <div class="avatar">
               <div class="mask mask-squircle w-12 h-12">
                 <img
                   src="/tailwind-css-component-profile-2@56w.png"
                   alt="Avatar Tailwind CSS Component"
                 />
               </div>
-            </div>
+            </div> -->
             <div>
               <div class="font-bold">{{ user.name | titlecase }}</div>
             </div>
@@ -82,15 +106,4 @@
       </tr>
     </tbody>
   </table>
-</div>
-
-<input type="checkbox" id="my_modal_6" class="modal-toggle" />
-<div class="modal">
-  <div class="modal-box">
-    <h3 class="font-bold text-lg">Add New User</h3>
-    <p class="py-4">This modal works with a hidden checkbox!</p>
-    <div class="modal-action">
-      <label for="my_modal_6" class="btn">Close!</label>
-    </div>
-  </div>
 </div>
