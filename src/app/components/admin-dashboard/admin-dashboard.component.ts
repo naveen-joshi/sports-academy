@@ -4,6 +4,8 @@ import { UserService } from 'src/app/user.service';
 import { LoadingService } from '../loader/loading.service';
 import * as XLSX from 'xlsx';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { AddUserComponent } from '../add-user/add-user.component';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -17,11 +19,13 @@ export class AdminDashboardComponent implements OnInit {
   private searchSubject: Subject<string> = new Subject<string>();
   public isFetching: boolean = true;
   public fileName = 'users.xlsx';
+  public totalUsers = 0;
 
   constructor(
     private userService: UserService,
     private loadingService: LoadingService,
-    private route: Router
+    private route: Router,
+    public dialog: MatDialog
   ) {}
 
   masterSelected: boolean = false;
@@ -30,12 +34,16 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingService.isLoading.next(true);
-    this.userService.getUsers().subscribe((users) => {
-      this.users = users;
-      this.filteredUsers = users;
-      this.loadingService.isLoading.next(false);
-      this.isFetching = false;
-    });
+    this.userService.getUsers().subscribe(
+      (users) => {
+        this.users = users;
+        this.totalUsers = users.length;
+        this.filteredUsers = users;
+        this.loadingService.isLoading.next(false);
+        this.isFetching = false;
+      },
+      () => {}
+    );
     this.searchSubject
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((value) => {
@@ -66,6 +74,18 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   viewUser(user: any) {
-    this.route.navigate(['add-user', user.id], { state: user });
+    const dialogRef = this.dialog.open(AddUserComponent, {
+      data: user,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  addUser() {
+    const dialogRef = this.dialog.open(AddUserComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

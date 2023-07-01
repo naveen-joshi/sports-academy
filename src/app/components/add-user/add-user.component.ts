@@ -1,6 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/user.service';
 
@@ -11,37 +17,57 @@ import { UserService } from 'src/app/user.service';
 })
 export class AddUserComponent implements OnInit {
   public UserForm!: FormGroup;
-  public userId = '';
+  public pageTitle!: string;
 
   constructor(
+    public dialogRef: MatDialogRef<AddUserComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private userService: UserService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private location: Location
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
-    this.userId = this.route.snapshot.params['id'];
-    let user = this.location.getState();
+    let user = this.data;
+
+    if (user) {
+      this.pageTitle = user.name;
+    } else {
+      this.pageTitle = 'Create New User';
+    }
 
     this.UserForm = this.fb.group({
-      name: ['John', [Validators.required]],
-      fatherName: ['John', [Validators.required]],
-      motherName: ['John', [Validators.required]],
-      dob: ['05/06/2018'],
-      gender: ['M'],
-      address: ['Phalodi'],
-      mobile: ['8787878787'],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z .]+$/)]],
+      fatherName: [
+        '',
+        [Validators.required, Validators.pattern(/^[a-zA-Z .]+$/)],
+      ],
+      motherName: [
+        '',
+        [Validators.required, Validators.pattern(/^[a-zA-Z .]+$/)],
+      ],
+      dob: ['', Validators.required],
+      gender: ['', [Validators.required]],
+      address: [
+        '',
+        [Validators.required, Validators.pattern(/^[a-zA-Z .-\/]+$/)],
+      ],
+      mobile: [
+        '',
+        [Validators.required, Validators.pattern(/^[6-9]{1}[0-9]{9}$/)],
+      ],
       branch: ['phalodi'],
       branchCode: ['PH'],
       date: [new Date().toLocaleDateString()],
-      activities: ['karate'],
+      activities: [null, Validators.required],
     });
 
-    if (this.userId) {
+    if (user) {
       this.UserForm.patchValue(user);
     }
+  }
+
+  get controls(): { [key: string]: AbstractControl } {
+    return this.UserForm.controls;
   }
 
   onSubmit() {

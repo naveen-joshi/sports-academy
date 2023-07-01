@@ -24,6 +24,9 @@ import { environment } from 'src/environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { LoaderComponent } from './components/loader/loader.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SuccessModalComponent } from './components/success-modal/success-modal.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     TabContainerComponent,
     AdminLandingComponent,
     LoaderComponent,
+    SuccessModalComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -52,6 +56,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     AngularFireAuthModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

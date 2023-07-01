@@ -1,15 +1,18 @@
 <section id="activities">
-  <h2 class="text-center text-[32px] my-[8px] font-bold">
-    Activities
-  </h2>
+  <h2 class="text-center text-[24px] my-[8px] font-bold">Activities</h2>
   <div
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full my-[16px]"
   >
     <div
       class="relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
-      *ngFor="let item of activity; let i = index;"
+      *ngFor="let item of activity; let i = index"
     >
-      <img class="object-cover w-full h-48" style="filter: brightness(0.5);" [src]="item.img" [alt]="item.alt" />
+      <img
+        class="object-cover w-full h-48"
+        style="filter: brightness(0.5)"
+        [src]="item.img"
+        [alt]="item.alt"
+      />
 
       <div class="absolute bottom-0 px-6 py-2">
         <h4

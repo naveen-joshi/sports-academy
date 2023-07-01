@@ -1,109 +1,229 @@
-<div class="flex items-center justify-between gap-[16px] custom">
-  <div class="card flex flex-col shadow-xl m-4 p-4 mx-auto my-[16px]">
-    <h3 class="text-2xl text-center">Create New User</h3>
-    <form class="flex flex-col gap-[8px]" [formGroup]="UserForm">
-      <div class="form-control w-full max-w-xs">
-        <label for="name" class="label"
-          ><span class="label-text">Name</span></label
+<h3 mat-dialog-title>{{ pageTitle }}</h3>
+<mat-dialog-content>
+  <form class="flex flex-col gap-[8px]" [formGroup]="UserForm">
+    <div class="form-control w-full max-w-xs">
+      <label for="name" class="label"
+        ><span class="label-text">Name</span></label
+      >
+      <input
+        id="name"
+        type="text"
+        placeholder="Type here"
+        class="input input-bordered min-w-[200px] max-w-[600px]"
+        formControlName="name"
+      />
+      <div *ngIf="controls['name'].touched">
+        <div
+          class="text-red-500 text-[12px]"
+          *ngIf="controls['name'].hasError('pattern')"
         >
-        <input
-          id="name"
-          type="text"
-          placeholder="Type here"
-          class="input input-bordered w-[80vw] max-w-[600px]"
-          formControlName="name"
-        />
-      </div>
-      <div class="form-control w-full max-w-xs">
-        <label for="fatherName" class="label"
-          ><span class="label-text">Father's Name</span></label
+          Only alphabets, space, and dot are allowed.
+        </div>
+        <div
+          class="text-red-500 text-[12px]"
+          *ngIf="controls['name'].hasError('required')"
         >
-        <input
-          id="fatherName"
-          type="text"
-          placeholder="Type here"
-          class="input input-bordered w-[80vw] max-w-[600px]"
-          formControlName="fatherName"
-        />
-      </div>
-      <div class="form-control w-full max-w-xs">
-        <label for="motherName" class="label"
-          ><span class="label-text">Mother's Name</span></label
-        >
-        <input
-          id="motherName"
-          type="text"
-          placeholder="Type here"
-          class="input input-bordered w-[80vw] max-w-[600px]"
-          formControlName="motherName"
-        />
-      </div>
-      <div class="form-control w-full max-w-xs">
-        <label for="dob" class="label"
-          ><span class="label-text">Date of birth</span></label
-        >
-        <input
-          id="dob"
-          type="date"
-          placeholder="Type here"
-          class="input input-bordered w-[80vw] max-w-[600px]"
-          formControlName="dob"
-        />
-      </div>
-      <div class="flex flex-col gap-[16px]">
-        <label class="label"><span class="label-text">Gender</span></label>
-        <div class="flex gap-[16px]">
-          <div class="flex gap-[8px]">
-            <input type="radio" name="gender" class="radio" />
-            <label for="male">Male</label>
-          </div>
-          <div class="flex gap-[8px]">
-            <input type="radio" name="gender" class="radio" />
-            <label for="female">Female</label>
-          </div>
+          Name is required.
         </div>
       </div>
-      <div class="form-control w-full">
-        <label class="label"><span class="label-text">Mobile</span></label>
-        <input
-          type="text"
-          placeholder="Enter your phone number"
-          class="input input-bordered w-[80vw] max-w-[600px]"
-          formControlName="mobile"
-        />
-      </div>
-      <div class="form-control w-full">
-        <label class="label"><span class="label-text">Activity</span></label>
-        <select
-          class="select select-bordered w-[80vw] max-w-[600px]"
-          formControlName="activities"
-        >
-          <option disabled selected>Pick your favorite Activity</option>
-          <option>Yoga</option>
-          <option>Dance</option>
-          <option>Karate</option>
-          <option>Skating</option>
-          <option>Drawing</option>
-          <option>Boxing</option>
-          <option>Swimming</option>
-          <option>Gym</option>
-        </select>
-      </div>
-    </form>
-
-    <div class="my-[16px] flex gap-[16px] flex-wrap">
-      <button
-        class="btn btn-secondary xs:w-full sm:w-full lg:w-[48.75%]"
-        routerLink="/admin-dashboard"
-      >
-        Cancel
-      </button>
-      <button
-        class="btn btn-primary xs:w-full sm:w-full lg:w-[48.5%]"
-        (click)="onSubmit()"
-      >
-        Submit
-      </button>
     </div>
-  </div>
-</div>
+    <div class="form-control w-full max-w-xs">
+      <label for="fatherName" class="label"
+        ><span class="label-text">Father's Name</span></label
+      >
+      <input
+        id="fatherName"
+        type="text"
+        placeholder="Type here"
+        class="input input-bordered min-w-[200px] max-w-[600px]"
+        formControlName="fatherName"
+      />
+      <div *ngIf="controls['fatherName'].touched">
+        <div
+          class="text-red-500 text-[12px]"
+          *ngIf="controls['fatherName'].hasError('pattern')"
+        >
+          Only alphabets, space, and dot are allowed.
+        </div>
+        <div
+          class="text-red-500 text-[12px]"
+          *ngIf="controls['fatherName'].hasError('required')"
+        >
+          Name is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-control w-full max-w-xs">
+      <label for="motherName" class="label"
+        ><span class="label-text">Mother's Name</span></label
+      >
+      <input
+        id="motherName"
+        type="text"
+        placeholder="Type here"
+        class="input input-bordered min-w-[200px] max-w-[600px]"
+        formControlName="motherName"
+      />
+      <div *ngIf="controls['motherName'].touched">
+        <div
+          class="text-red-500 text-[12px]"
+          *ngIf="controls['motherName'].hasError('pattern')"
+        >
+          Only alphabets, space, and dot are allowed.
+        </div>
+        <div
+          class="text-red-500 text-[12px]"
+          *ngIf="controls['motherName'].hasError('required')"
+        >
+          Name is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-control w-full max-w-xs">
+      <label for="dob" class="label"
+        ><span class="label-text">Date of birth</span></label
+      >
+      <input
+        id="dob"
+        type="date"
+        placeholder="Type here"
+        class="input input-bordered min-w-[200px] max-w-[600px]"
+        formControlName="dob"
+      />
+      <div *ngIf="controls['dob'].touched">
+        <div
+          class="text-red-500 text-[12px]"
+          *ngIf="controls['dob'].hasError('required')"
+        >
+          Date of birth is required.
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-[16px]">
+      <label class="label"><span class="label-text">Gender</span></label>
+      <div class="flex gap-[16px]">
+        <div class="flex gap-[8px]">
+          <input
+            type="radio"
+            name="gender"
+            class="radio"
+            value="M"
+            formControlName="gender"
+          />
+          <label for="male">Male</label>
+        </div>
+        <div class="flex gap-[8px]">
+          <input
+            type="radio"
+            name="gender"
+            class="radio"
+            value="F"
+            formControlName="gender"
+          />
+          <label for="female">Female</label>
+        </div>
+      </div>
+      <div *ngIf="controls['gender'].touched">
+        <div
+          class="text-red-500 text-[12px]"
+          *ngIf="controls['gender'].hasError('required')"
+        >
+          Gender is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-control w-full">
+      <label class="label"><span class="label-text">Mobile</span></label>
+      <input
+        type="text"
+        placeholder="Enter your phone number"
+        class="input input-bordered min-w-[200px] max-w-[600px]"
+        formControlName="mobile"
+      />
+      <div *ngIf="controls['mobile'].touched">
+        <div
+          class="text-red-500 text-[12px]"
+          *ngIf="controls['mobile'].hasError('pattern')"
+        >
+          Input valid phone number
+        </div>
+        <div
+          class="text-red-500 text-[12px]"
+          *ngIf="controls['mobile'].hasError('required')"
+        >
+          Phone number is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-control w-full">
+      <label class="label"><span class="label-text">Activity</span></label>
+      <select
+        class="select select-bordered min-w-[200px] max-w-[600px]"
+        formControlName="activities"
+      >
+        <option disabled selected>Pick your favorite Activity</option>
+        <option>Yoga</option>
+        <option>Dance</option>
+        <option>Karate</option>
+        <option>Skating</option>
+        <option>Drawing</option>
+        <option>Boxing</option>
+        <option>Swimming</option>
+        <option>Gym</option>
+      </select>
+      <div *ngIf="controls['activities'].touched">
+        <div
+          *ngIf="controls['activities'].hasError('required')"
+          class="text-red-500 text-[12px]"
+        >
+          Please Select Category
+        </div>
+      </div>
+    </div>
+    <div>
+      <label
+        for="address"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Address</label
+      >
+      <textarea
+        formControlName="address"
+        id="address"
+        rows="1"
+        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="Address..."
+      ></textarea>
+      <div *ngIf="controls['address'].touched">
+        <div
+          class="text-red-500 text-[12px]"
+          *ngIf="controls['address'].hasError('pattern')"
+        >
+          Only alphabets, numbers, space, / and - are allowed.
+        </div>
+        <div
+          class="text-red-500 text-[12px]"
+          *ngIf="controls['address'].hasError('required')"
+        >
+          Addrss is required.
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-secondary btn-sm mr-2" mat-dialog-close>Cancel</button>
+  <button
+    class="btn btn-primary btn-sm mr-2"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="onSubmit()"
+    [ngClass]="
+      UserForm.invalid
+        ? 'cursor-not-allowed opacity-50'
+        : 'cursor-pointer opacity-100'
+    "
+    [disabled]="UserForm.invalid"
+  >
+    Create
+  </button>
+</mat-dialog-actions>
