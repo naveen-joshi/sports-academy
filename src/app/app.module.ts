@@ -26,7 +26,9 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { LoaderComponent } from './components/loader/loader.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SuccessModalComponent } from './components/success-modal/success-modal.component';
+import { SuccessModalComponent } from './components/modals/success-modal.component';
+import { DeleteModalComponent } from './components/modals/delete-modal.component';
+import { CategoryModalComponent } from './components/modals/category-modal.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { SuccessModalComponent } from './components/success-modal/success-modal.
     AdminLandingComponent,
     LoaderComponent,
     SuccessModalComponent,
+    DeleteModalComponent,
+    CategoryModalComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

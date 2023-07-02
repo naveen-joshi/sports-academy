@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/user.service';
-import { SuccessModalComponent } from '../success-modal/success-modal.component';
+import { SuccessModalComponent } from '../modals/success-modal.component';
 
 @Component({
   selector: 'app-contact',

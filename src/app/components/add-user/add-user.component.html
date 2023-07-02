@@ -1,5 +1,5 @@
-<h3 mat-dialog-title>{{ pageTitle }}</h3>
-<mat-dialog-content>
+<!-- <h3 mat-dialog-title>{{ pageTitle }}</h3> -->
+<!-- <mat-dialog-content>
   <form class="flex flex-col gap-[8px]" [formGroup]="UserForm">
     <div class="form-control w-full max-w-xs">
       <label for="name" class="label"
@@ -183,14 +183,14 @@
     <div>
       <label
         for="address"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        class="block mb-2 text-sm font-medium text-gray-900 text-white"
         >Address</label
       >
       <textarea
         formControlName="address"
         id="address"
         rows="1"
-        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Address..."
       ></textarea>
       <div *ngIf="controls['address'].touched">
@@ -225,5 +225,311 @@
     [disabled]="UserForm.invalid"
   >
     Create
+  </button>
+</mat-dialog-actions> -->
+<!-- Modal header -->
+<div
+  class="flex justify-between items-center p-4 rounded-t border-b bg-gray-800 border-gray-600 text-white"
+>
+  <h3 class="text-lg font-semibold">
+    {{ pageTitle }}
+  </h3>
+  <button
+    mat-dialog-close
+    type="button"
+    class="rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-600 hover:text-white"
+  >
+    <svg
+      aria-hidden="true"
+      class="w-5 h-5"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+        clip-rule="evenodd"
+      ></path>
+    </svg>
+    <span class="sr-only">Close modal</span>
+  </button>
+</div>
+<!-- Modal Content -->
+<mat-dialog-content style="padding: 0">
+  <div class="relative px-4 bg-gray-800 shadow sm:p-5" text-white>
+    <form [formGroup]="UserForm">
+      <div class="grid gap-4 mb-4 sm:grid-cols-2">
+        <div>
+          <label for="name" [class]="labelStyle">Name</label>
+          <input
+            type="text"
+            formControlName="name"
+            id="name"
+            [class]="inputStyle"
+            placeholder="Name"
+          />
+          <div *ngIf="controls['name'].touched">
+            <div
+              class="text-red-500 text-[12px]"
+              *ngIf="controls['name'].hasError('pattern')"
+            >
+              Only alphabets, space, and dot are allowed.
+            </div>
+            <div
+              class="text-red-500 text-[12px]"
+              *ngIf="controls['name'].hasError('required')"
+            >
+              Name is required.
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="fatherName" [class]="labelStyle">Father's Name</label>
+          <input
+            type="text"
+            formControlName="fatherName"
+            id="fatherName"
+            [class]="inputStyle"
+            placeholder="Father's Name"
+          />
+          <div *ngIf="controls['fatherName'].touched">
+            <div
+              class="text-red-500 text-[12px]"
+              *ngIf="controls['fatherName'].hasError('pattern')"
+            >
+              Only alphabets, space, and dot are allowed.
+            </div>
+            <div
+              class="text-red-500 text-[12px]"
+              *ngIf="controls['fatherName'].hasError('required')"
+            >
+              Father's Name is required.
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="motherName" [class]="labelStyle">Mother's Name</label>
+          <input
+            type="text"
+            formControlName="motherName"
+            id="motherName"
+            [class]="inputStyle"
+            placeholder="Mother's Name"
+          />
+          <div *ngIf="controls['motherName'].touched">
+            <div
+              class="text-red-500 text-[12px]"
+              *ngIf="controls['motherName'].hasError('pattern')"
+            >
+              Only alphabets, space, and dot are allowed.
+            </div>
+            <div
+              class="text-red-500 text-[12px]"
+              *ngIf="controls['motherName'].hasError('required')"
+            >
+              Mother's Name is required.
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="dob" [class]="labelStyle">Date of Birth</label>
+          <input
+            type="date"
+            formControlName="dob"
+            id="dob"
+            [class]="inputStyle"
+            placeholder="Enter date of birth"
+          />
+          <div *ngIf="controls['dob'].touched">
+            <div
+              class="text-red-500 text-[12px]"
+              *ngIf="controls['dob'].hasError('required')"
+            >
+              Date of Birth is required.
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="mobile" [class]="labelStyle">Phone Number</label>
+          <input
+            formControlName="mobile"
+            type="tel"
+            id="mobile"
+            [class]="inputStyle"
+            placeholder="Enter phone number"
+          />
+          <div *ngIf="controls['mobile'].touched">
+            <div
+              class="text-red-500 text-[12px]"
+              *ngIf="controls['mobile'].hasError('pattern')"
+            >
+              Input valid phone number
+            </div>
+            <div
+              class="text-red-500 text-[12px]"
+              *ngIf="controls['mobile'].hasError('required')"
+            >
+              Phone number is required.
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="category" [class]="labelStyle">Category</label>
+          <select
+            formControlName="activities"
+            id="category"
+            class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500"
+          >
+            <option disabled selected="">Pick your favorite Activity</option>
+            <option value="yoga">Yoga</option>
+            <option value="dance">Dance</option>
+            <option value="karate">Karate</option>
+            <option value="sktaing">Skating</option>
+            <option value="drawing">Drawing</option>
+            <option value="boxing">Boxing</option>
+            <option value="swimming">Swimming</option>
+            <option value="gym">Gym</option>
+          </select>
+          <div *ngIf="controls['activities'].touched">
+            <div
+              *ngIf="controls['activities'].hasError('required')"
+              class="text-red-500 text-[12px]"
+            >
+              Please Select Category
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="profile_pic" [class]="labelStyle">Upload Picture</label>
+          <div class="flex items-center max-w-full gap-[8px]">
+            <img
+              *ngIf="imgSrc"
+              class="block w-[5rem] h-[5rem] rounded-full"
+              [src]="
+                this.sanitizer.bypassSecurityTrustUrl(
+                  'data:image/jpg;base64,' + imgSrc
+                )
+              "
+              alt="Hele avatar"
+            />
+            <img
+              *ngIf="!imgSrc"
+              class="block w-[5rem] h-[5rem] rounded-full"
+              src="assets/icons/user.svg"
+              alt="user avatar"
+            />
+            <div class="flex flex-col">
+              <input
+                #myInput
+                class="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
+                aria-describedby="profile_pic"
+                id="profile_pic"
+                type="file"
+                (change)="getImgData($event)"
+                accept=".jpg,.png,.jpeg"
+              />
+              <p class="mt-1 text-sm text-gray-300" id="profile_pic">
+                PNG, JPG (MAX. 200kb).
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="gender" [class]="labelStyle">Gender</label>
+          <ul
+            class="items-center w-full text-sm font-medium border rounded-lg sm:flex bg-gray-700 border-gray-600 text-white"
+          >
+            <li
+              class="w-full border-b sm:border-b-0 sm:border-r border-gray-600"
+            >
+              <div class="flex items-center pl-3">
+                <input
+                  id="male"
+                  type="radio"
+                  value="M"
+                  formControlName="gender"
+                  name="gender"
+                  class="w-4 h-4 bg-gray-600 border-gray-500"
+                />
+                <label
+                  for="male"
+                  class="w-full py-3 ml-2 text-sm font-medium text-gray-300"
+                  >Male
+                </label>
+              </div>
+            </li>
+            <li
+              class="w-full border-b sm:border-b-0 sm:border-r border-gray-600"
+            >
+              <div class="flex items-center pl-3">
+                <input
+                  id="female"
+                  type="radio"
+                  value="F"
+                  formControlName="gender"
+                  name="gender"
+                  class="w-4 h-4 ring-offset-gray-700bg-gray-600 border-gray-500"
+                />
+                <label
+                  for="female"
+                  class="w-full py-3 ml-2 text-sm font-medium text-gray-300"
+                  >Female
+                </label>
+              </div>
+            </li>
+          </ul>
+          <div *ngIf="controls['gender'].touched">
+            <div
+              class="text-red-500 text-[12px]"
+              *ngIf="controls['gender'].hasError('required')"
+            >
+              Please Select Gender
+            </div>
+          </div>
+        </div>
+        <div class="sm:col-span-2">
+          <label for="address" [class]="labelStyle">Address</label>
+          <textarea
+            id="address"
+            formControlName="address"
+            rows="2"
+            class="block p-2.5 w-full text-sm rounded-lg border bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500"
+            placeholder="Enter your address here"
+          ></textarea>
+          <div *ngIf="controls['address'].touched">
+            <div
+              class="text-red-500 text-[12px]"
+              *ngIf="controls['address'].hasError('pattern')"
+            >
+              Only alphabets, numbers, space, / and - are allowed.
+            </div>
+            <div
+              class="text-red-500 text-[12px]"
+              *ngIf="controls['address'].hasError('required')"
+            >
+              Addrss is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="bg-gray-800 border-gray-600 text-white" align="end">
+  <button class="btn btn-secondary btn-sm mr-2" mat-dialog-close>Cancel</button>
+  <button
+    class="btn btn-primary btn-sm mr-2"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="onSubmit()"
+    [ngClass]="
+      UserForm.invalid
+        ? 'cursor-not-allowed opacity-100'
+        : 'cursor-pointer opacity-100'
+    "
+    [disabled]="UserForm.invalid"
+  >
+    {{ btnTitle }}
   </button>
 </mat-dialog-actions>

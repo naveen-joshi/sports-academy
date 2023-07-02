@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from './user.model';
-import {
-  AngularFireDatabase,
-  AngularFireList,
-} from '@angular/fire/compat/database';
+import { AngularFireList } from '@angular/fire/compat/database';
 
 import {
   Firestore,
@@ -15,41 +11,39 @@ import {
   deleteDoc,
   getDoc,
 } from '@angular/fire/firestore';
-import { docSnapshots } from '@angular/fire/firestore';
+import { Category } from './category.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
-  private dbPath = '/users';
-
-  usersRef: AngularFireList<User>;
+export class CategoryService {
+  categoriesRef: AngularFireList<Category>;
 
   constructor(private fs: Firestore) {}
 
   getUsers(): any {
-    const collectionInstance = collection(this.fs, 'users');
+    const collectionInstance = collection(this.fs, 'category');
     return collectionData(collectionInstance, { idField: 'id' });
   }
 
-  create(user: User): any {
-    const collectionInstance = collection(this.fs, 'users');
-    return addDoc(collectionInstance, user);
+  create(category: Category): any {
+    const collectionInstance = collection(this.fs, 'category');
+    return addDoc(collectionInstance, category);
   }
 
   getUser(userId: string): any {
-    const docInstance = doc(this.fs, 'users', userId);
+    const docInstance = doc(this.fs, 'category', userId);
   }
 
   update(id: string, formData: any): Promise<void> {
-    const docInstance = doc(this.fs, 'users', id);
+    const docInstance = doc(this.fs, 'category', id);
     const updatedData = { ...formData };
 
     return updateDoc(docInstance, updatedData);
   }
 
   delete(id: string): Promise<void> {
-    const docInstance = doc(this.fs, 'users', id);
+    const docInstance = doc(this.fs, 'category', id);
     return deleteDoc(docInstance);
   }
 }

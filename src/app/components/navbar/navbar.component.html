@@ -1,55 +1,22 @@
-<!-- <div class="navbar w-full bg-white">
-  <div class="navbar-start">
-    <div class="dropdown">
-      <label tabindex="0" class="btn btn-ghost lg:hidden">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h8m-8 6h16"
-          />
-        </svg>
-      </label>
-      <ul
-        tabindex="0"
-        class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-      >
-        <li><a class="text-xl">Home</a></li>
-        <li tabindex="0">
-          <a class="justify-between" class="text-xl">Academy</a>
-        </li>
-        <li><a class="text-xl">Contact</a></li>
-      </ul>
-    </div>
-    <a
-      class="flex flex-row gap-[16px] justify-center items-center font-bold text-2xl"
-    >
-      <img src="assets/img/logo.jpg" alt="" width="56px" height="56px" />
-      <span class="text-[#2f4f4f]">The Sports Academy</span>
-    </a>
-  </div>
-  <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1">
-      <li><a class="text-xl">Home</a></li>
-      <li tabindex="0"><a href="#activities" class="text-xl">Activities</a></li>
-      <li><a href="#contact" class="text-xl">Contact</a></li>
-    </ul>
-  </div>
-  
-</div> -->
-
-<div class="navbar bg-[#13111C] w-full justify-center">
+<div class="navbar bg-[#13111C] w-full justify-between">
   <div
     class="navbar-center flex flex-row gap-[16px] justify-center items-center font-bold text-2xl"
   >
     <img src="assets/img/logo-2.png" alt="" width="56px" height="56px" />
     <span class="text-white">The Sports Academy</span>
   </div>
+  <button class="btn btn-primary" (click)="downloadQR()">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="24"
+      viewBox="0 -960 960 960"
+      width="24"
+      fill="currentColor"
+    >
+      <path
+        d="M520-120v-80h80v80h-80Zm-80-80v-200h80v200h-80Zm320-120v-160h80v160h-80Zm-80-160v-80h80v80h-80Zm-480 80v-80h80v80h-80Zm-80-80v-80h80v80h-80Zm360-280v-80h80v80h-80ZM180-660h120v-120H180v120Zm-60 60v-240h240v240H120Zm60 420h120v-120H180v120Zm-60 60v-240h240v240H120Zm540-540h120v-120H660v120Zm-60 60v-240h240v240H600Zm80 480v-120h-80v-80h160v120h80v80H680ZM520-400v-80h160v80H520Zm-160 0v-80h-80v-80h240v80h-80v80h-80Zm40-200v-160h80v80h80v80H400Zm-190-90v-60h60v60h-60Zm0 480v-60h60v60h-60Zm480-480v-60h60v60h-60Z"
+      />
+    </svg>
+    Generate QR
+  </button>
 </div>

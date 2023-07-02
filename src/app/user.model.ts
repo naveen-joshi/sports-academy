@@ -9,5 +9,6 @@ export interface User {
   branch: string;
   branchCode: string;
   gender: string;
-  date: string;
+  registraionDate: string;
+  contents?: string;
 }
