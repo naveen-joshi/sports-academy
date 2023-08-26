@@ -29,6 +29,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SuccessModalComponent } from './components/modals/success-modal.component';
 import { DeleteModalComponent } from './components/modals/delete-modal.component';
 import { CategoryModalComponent } from './components/modals/category-modal.component';
+import { HighlightsComponent } from './components/highlights/highlights.component';
+import { EventModalComponent } from './components/modals/event-modal.component';
+import { NewsEventModalComponent } from './components/modals/news-event.modal';
+import { EventComponent } from './components/event/event.component';
+import { NewsComponent } from './components/news/news.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +54,11 @@ import { CategoryModalComponent } from './components/modals/category-modal.compo
     SuccessModalComponent,
     DeleteModalComponent,
     CategoryModalComponent,
+    EventModalComponent,
+    HighlightsComponent,
+    NewsEventModalComponent,
+    EventComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

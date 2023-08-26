@@ -5,7 +5,7 @@ import { CategoryService } from 'src/app/category.service';
 import { UserService } from 'src/app/user.service';
 
 @Component({
-  selector: 'app-category-modal',
+  selector: 'app-news-modal',
   template: `<mat-dialog-content style="padding: 0 !important;">
     <div class="relative shadow bg-gray-800 p-5">
       <button
@@ -30,40 +30,35 @@ import { UserService } from 'src/app/user.service';
         <span class="sr-only">Close modal</span>
       </button>
       <form [formGroup]="categoryForm">
-        <div>
-          <label for="name" [class]="labelStyle">Category Name</label>
-          <input
-            type="text"
-            formControlName="name"
-            id="name"
-            [class]="inputStyle"
-            placeholder="Category Name"
-          />
-        </div>
+        <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                    <div>
+                        <label for="name" [class]="labelStyle">Event Name</label>
+                        <input type="text" name="name" id="name" [class]="inputStyle" placeholder="Type product name" required="">
+                    </div>
+                    <div>
+                        <label for="location" [class]="labelStyle">Location</label>
+                        <input type="text" name="location" id="location" [class]="inputStyle" placeholder="Enter Event Location" required="">
+                    </div>
+                    <div>
+                        <label for="date" [class]="labelStyle">Date</label>
+                        <input type="date" name="price" id="date" [class]="inputStyle" placeholder="$2999" required="">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="description" [class]="labelStyle">Description</label>
+                        <textarea id="description" rows="4" [class]="inputStyle" placeholder="Write product description here"></textarea>                    
+                    </div>
+                </div>
       </form>
       <button
         class="btn btn-primary my-[8px] btn-sm"
         (click)="createCategory()"
       >
-        Add Category
+        Create New Event
       </button>
-
-      <h3 class="text-white mb-[16px]">Category List</h3>
-      <div
-        class="w-48 text-sm font-medium border rounded-lg bg-gray-700 border-gray-600 text-white"
-      >
-        <a
-          aria-current="true"
-          [class]="listStyle"
-          *ngFor="let category of categories"
-        >
-          {{ category.name }}
-        </a>
-      </div>
     </div>
   </mat-dialog-content> `,
 })
-export class CategoryModalComponent implements OnInit {
+export class NewsEventModalComponent implements OnInit {
   public listStyle =
     'block w-full px-4 py-2 border-b rounded-t-lg cursor-pointer bg-gray-800 border-gray-600';
   public categories: any[] = [];
@@ -77,7 +72,7 @@ export class CategoryModalComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    public dialogRef: MatDialogRef<CategoryModalComponent>,
+    public dialogRef: MatDialogRef<NewsEventModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public fb: FormBuilder
   ) {}

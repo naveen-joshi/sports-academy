@@ -11,10 +11,17 @@ body {
 body {
     margin: 0;
     font-family: "Inter" sans-serif;
+    color: #1F2627;
 }
 
-body {
-    color: #1F2627;
+.bg-custom {
+    background-color: #2b4162;
+    background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
+
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .label-text {

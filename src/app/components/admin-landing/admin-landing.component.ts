@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth, getAuth, signOut } from '@angular/fire/auth';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalstorageService } from 'src/app/local-storage.service';
+import { EventModalComponent } from '../modals/event-modal.component';
 
 @Component({
   selector: 'app-admin-landing',
@@ -10,12 +12,15 @@ import { LocalstorageService } from 'src/app/local-storage.service';
 })
 export class AdminLandingComponent implements OnInit {
   // public auth = getAuth();
+  public events: any[] = [];
+  public news: any[] = [];
 
   constructor(
     private localStorage: LocalstorageService,
     private route: Router,
     private activatedRoute: ActivatedRoute,
-    private authf: Auth
+    private authf: Auth,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -46,7 +51,7 @@ export class AdminLandingComponent implements OnInit {
       case 0: {
         this.route.navigate([], {
           relativeTo: this.activatedRoute,
-          queryParams: { tab: 'director' },
+          queryParams: { tab: 'dashboard' },
           queryParamsHandling: 'merge',
         });
         break;
@@ -54,7 +59,7 @@ export class AdminLandingComponent implements OnInit {
       case 1: {
         this.route.navigate([], {
           relativeTo: this.activatedRoute,
-          queryParams: { tab: 'add-user' },
+          queryParams: { tab: 'news' },
           queryParamsHandling: 'merge',
         });
         break;
@@ -68,7 +73,7 @@ export class AdminLandingComponent implements OnInit {
         this.selectedTab = 0;
         break;
       }
-      case 'add-user': {
+      case 'news': {
         this.selectedTab = 1;
         break;
       }

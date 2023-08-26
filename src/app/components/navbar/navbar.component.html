@@ -1,11 +1,11 @@
-<div class="navbar bg-[#13111C] w-full justify-between">
+<div class="navbar w-full justify-between">
   <div
-    class="navbar-center flex flex-row gap-[16px] justify-center items-center font-bold text-2xl"
+    class="navbar-center flex flex-row gap-[16px] justify-center items-center font-bold text-[1.25rem]"
   >
     <img src="assets/img/logo-2.png" alt="" width="56px" height="56px" />
     <span class="text-white">The Sports Academy</span>
   </div>
-  <button class="btn btn-primary" (click)="downloadQR()">
+  <button *ngIf="isVisible" class="btn btn-primary" (click)="downloadQR()">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       height="24"

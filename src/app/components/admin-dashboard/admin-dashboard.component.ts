@@ -9,6 +9,7 @@ import { AddUserComponent } from '../add-user/add-user.component';
 import { DeleteModalComponent } from '../modals/delete-modal.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CategoryModalComponent } from '../modals/category-modal.component';
+import { CategoryService } from 'src/app/category.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -23,9 +24,12 @@ export class AdminDashboardComponent implements OnInit {
   public isFetching: boolean = true;
   public fileName = 'users.xlsx';
   public totalUsers = 0;
+  public categories: any[] = [];
+  public totalCategories = 0;
 
   constructor(
     private userService: UserService,
+    private categoryService: CategoryService,
     private loadingService: LoadingService,
     private route: Router,
     public dialog: MatDialog,
@@ -38,6 +42,7 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+    this.getCategories();
     this.searchSubject
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((value) => {
@@ -57,6 +62,13 @@ export class AdminDashboardComponent implements OnInit {
       },
       () => {}
     );
+  }
+
+  getCategories() {
+    this.categoryService.getCategories().subscribe((data) => {
+      this.categories = data;
+      this.totalCategories = data.length;
+    });
   }
 
   onSearch(value: string) {
@@ -110,6 +122,8 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   openCategories() {
-    this.dialog.open(CategoryModalComponent, {});
+    this.dialog.open(CategoryModalComponent, {
+      data: this.categories,
+    });
   }
 }

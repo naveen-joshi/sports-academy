@@ -1,33 +1,22 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
-import { map, tap } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
+import { LocalstorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
-  canActivate():
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    return this.auth.user$.pipe(
-      tap((user) => {
-        if (!user) {
-          console.log('user not found in guard');
-          this.router.navigateByUrl('/login');
-        }
-      }),
-      map((user) => (user ? true : false))
-    );
+  constructor(
+    private router: Router,
+    private localStorage: LocalstorageService
+  ) {}
+  canActivate(): boolean {
+    let user = this.localStorage.getItem('user');
+    if (!user) {
+      this.router.navigateByUrl('/login');
+      return false;
+    } else {
+      return true;
+    }
   }
 }

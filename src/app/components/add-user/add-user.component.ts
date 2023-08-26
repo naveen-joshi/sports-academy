@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CategoryService } from 'src/app/category.service';
 import { UserService } from 'src/app/user.service';
 
 const MAXIMUM_FILE_SIZE = 2 * 1024 * 200;
@@ -34,29 +35,31 @@ export class AddUserComponent implements OnInit {
   public labelStyle = 'block mb-2 text-sm font-medium text-white';
 
   public imgSrc = '';
-  public contents = '';
   public logoErrShow = false;
   public dimesionErr = false;
   public invalidFormat = false;
+  public categories: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<AddUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private userService: UserService,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
-    this.user = this.data;
+    this.getCategories();
+    this.user = { ...this.data };
 
-    if (this.user) {
+    if (Object.keys(this.user).length) {
       this.pageTitle = this.user.name;
       this.btnTitle = 'Update';
       this.imgSrc = this.user.contents;
     } else {
-      this.pageTitle = 'Create New User';
-      this.btnTitle = 'Create';
+      this.pageTitle = 'Register User';
+      this.btnTitle = 'Register';
     }
 
     this.UserForm = this.fb.group({
@@ -81,12 +84,16 @@ export class AddUserComponent implements OnInit {
       ],
       branch: ['phalodi'],
       branchCode: ['PH'],
-      registraionDate: [new Date().toLocaleDateString()],
+      registrationDate: [new Date().toLocaleDateString()],
       activities: [null, Validators.required],
+      contents: [null, Validators.required],
+      status: ['applied'],
     });
 
-    if (this.user) {
+    if (Object.keys(this.user).length) {
+      console.log(this.user);
       this.UserForm.patchValue(this.user);
+      console.log(this.UserForm.getRawValue());
     }
   }
 
@@ -94,10 +101,29 @@ export class AddUserComponent implements OnInit {
     return this.UserForm.controls;
   }
 
+  getCategories(): void {
+    this.categoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
+
+  toggleStatus(e: any): void {
+    if (this.user && this.user.status === 'applied' && e.target.checked) {
+      this.user.status = 'registered';
+      console.log(this.user.status);
+      this.controls['status'].setValue('registered');
+    } else {
+      this.user.status = 'applied';
+      console.log(this.user.status);
+      this.controls['status'].setValue('applied');
+    }
+  }
+
   onSubmit() {
     let form = this.UserForm.getRawValue();
-    form = { ...form, contents: this.contents };
-    this.btnTitle === 'Create' ? this.createUser(form) : this.updateUser(form);
+    this.btnTitle === 'Register'
+      ? this.createUser(form)
+      : this.updateUser(form);
   }
 
   createUser(form: any) {
@@ -129,7 +155,7 @@ export class AddUserComponent implements OnInit {
   getImgData(e: any) {
     const fileList = e.target.files[0];
     if (!fileList && this.imgSrc) {
-      this.contents = this.imgSrc;
+      this.UserForm.get('contents')?.setValue(this.imgSrc);
     } else {
       if (fileList.size > MAXIMUM_FILE_SIZE) {
         this.deleteUpload();
@@ -160,7 +186,7 @@ export class AddUserComponent implements OnInit {
       img.src = 'data:image/jpg;base64,' + this.imgSrc;
       img.onload = () => {
         this.dimesionErr = false;
-        this.contents = this.imgSrc;
+        this.UserForm.get('contents')?.setValue(this.imgSrc);
       };
     };
   }

@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { AdminLandingComponent } from './components/admin-landing/admin-landing.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -18,10 +19,12 @@ const routes: Routes = [
   {
     path: 'admin-landing',
     component: AdminLandingComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'add-user/:id',
     component: AddUserComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: '**',

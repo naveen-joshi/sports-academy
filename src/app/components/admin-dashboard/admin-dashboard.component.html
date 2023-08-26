@@ -45,7 +45,7 @@
         />
       </svg>
 
-      <span class="font-bold text-[#8CAEF2]"> 45 </span>
+      <span class="font-bold text-[#8CAEF2]"> {{ totalCategories }} </span>
     </div>
 
     <div class="mt-2 text-sm text-[#A1A0AB]">Categories</div>
@@ -57,7 +57,7 @@
 </div>
 
 <div
-  class="flex flex-col md:flex-row gap-[8px] md:justify-between md:items-center bg-[#51007C] p-[8px] m-[8px] rounded"
+  class="flex flex-col md:flex-row gap-[8px] md:justify-between md:items-center p-[8px] m-[8px] rounded"
 >
   <div class="relative">
     <div
@@ -138,6 +138,7 @@
         <th>Category</th>
         <th>Mobile</th>
         <th>Registration Date</th>
+        <th>Status</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -151,12 +152,19 @@
             <div class="avatar">
               <div class="mask mask-squircle w-12 h-12">
                 <img
+                  *ngIf="user.contents"
                   [src]="
                     this.sanitizer.bypassSecurityTrustUrl(
                       'data:image/jpg;base64,' + user.contents
                     )
                   "
                   alt="User Image"
+                />
+                <img
+                  *ngIf="!user.contents"
+                  class="block w-[5rem] h-[5rem] rounded-full"
+                  src="assets/icons/user.svg"
+                  alt="user avatar"
                 />
               </div>
             </div>
@@ -167,7 +175,15 @@
         </td>
         <td>{{ user.activities | titlecase }}</td>
         <td>{{ user.mobile }}</td>
-        <td>{{ user.registrationDate | date : "dd/MM/YYYY" }}</td>
+        <td>{{ user.registrationDate }}</td>
+        <td>
+          <div class="badge badge-info" *ngIf="user.status === 'applied'">
+            Applied
+          </div>
+          <div class="badge badge-success" *ngIf="user.status === 'registered'">
+            Registered
+          </div>
+        </td>
         <td class="flex gap-[8px] items-center">
           <button
             class="btn btn-square bg-slate-800 hover:bg-slate-500"
