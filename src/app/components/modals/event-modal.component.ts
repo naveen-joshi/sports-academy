@@ -33,11 +33,11 @@ import { UserService } from 'src/app/user.service';
         <div class="grid gap-4 mb-4 sm:grid-cols-2">
                     <div>
                         <label for="name" [class]="labelStyle">Event Name</label>
-                        <input type="text" name="name" id="name" [class]="inputStyle" placeholder="Type product name" required="">
+                        <input type="text" name="name" id="name" [class]="inputStyle" placeholder="Type Event Name" required="">
                     </div>
                     <div>
-                        <label for="location" [class]="labelStyle">Location</label>
-                        <input type="text" name="location" id="location" [class]="inputStyle" placeholder="Enter Event Location" required="">
+                        <label for="venue" [class]="labelStyle">Venue</label>
+                        <input type="text" name="venue" id="venue" [class]="inputStyle" placeholder="Enter Event Venue" required="">
                     </div>
                     <div>
                         <label for="date" [class]="labelStyle">Date</label>
@@ -45,7 +45,7 @@ import { UserService } from 'src/app/user.service';
                     </div>
                     <div class="sm:col-span-2">
                         <label for="description" [class]="labelStyle">Description</label>
-                        <textarea id="description" rows="4" [class]="inputStyle" placeholder="Write product description here"></textarea>                    
+                        <textarea id="description" rows="4" [class]="inputStyle" placeholder="Write Event description here"></textarea>                    
                     </div>
                 </div>
       </form>

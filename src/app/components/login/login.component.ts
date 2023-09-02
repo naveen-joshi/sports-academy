@@ -20,6 +20,9 @@ import { LocalstorageService } from 'src/app/local-storage.service';
 export class LoginComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public loginForm!: FormGroup;
+  public inputStyle =
+    'border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white dark:text-white focus:ring-primary-500 focus:border-primary-500 min-w-[250px]';
+  public labelStyle = 'block mb-2 text-sm font-medium text-white';
   // public auth = getAuth();
   constructor(
     private fb: FormBuilder,
